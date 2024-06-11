@@ -13,7 +13,7 @@ import co.yedam.service.BoardServiceImpl;
 import co.yedam.vo.BoardVO;
 
 /*
- *  oracle db에 글목록을 조회 -> boardList.jsp 출력.
+ *  oracle db에 글목록을 조회 -> boardList.jsp 출력.  집에서 커밑
  */
 
 public class BoardList implements Control {
