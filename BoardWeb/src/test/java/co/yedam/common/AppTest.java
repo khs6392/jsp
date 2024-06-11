@@ -5,32 +5,22 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import co.yedam.mapper.StudentMapper;
-import co.yedam.vo.Student;
+import co.yedam.mapper.BoardMapper;
+import co.yedam.vo.BoardVO;
 
 public class AppTest {
 	public static void main(String[] args) {
 		SqlSessionFactory sqlSessionFactory =DataSource.getInstance();
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
-		// interface - 구현객체
-		StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+		//interface - 구현객체.
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
-		Student std = new Student();
-		std.setStdNo("S0005");
-		std.setStdName("김교재");
-		std.setPhone("010-5555-5555");
-		std.setBldType("O");
-		
-		//sqlSession.update("co.yedam.mapper.StudentMapper.updateStudent",std);
-		mapper.updateStudent(std);
-		sqlSession.commit();
-		
-		List<Student> list 
-				//=sqlSession.selectList("co.yedam.mapper.StudentMapper.selectBlog");
-				= mapper.selectBlog();
-		for(Student std1 : list) {
-			System.out.println(std1.toString());
+		List<BoardVO> list = mapper.boardList();
+		for(BoardVO bvo : list) {
+			System.out.println(bvo.toString());
 		}
+		
+	
 	}
 }
