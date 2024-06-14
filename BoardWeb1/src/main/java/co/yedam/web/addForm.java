@@ -34,13 +34,12 @@ public class addForm implements Control {
 		boardvo.setWriter(writer);
 		 
 		if(bsv.addBoard(boardvo)) {
-		
 			System.out.println("정상등록..");
-			resp.sendRedirect("boardList.do");
+			resp.sendRedirect("board/boardList.tiles");
 		}else {
 			System.out.println("등록실패..");
 			req.setAttribute("message", "처리 중 오류 방생");
-			req.getRequestDispatcher("WEB-INF/view/boardForm.jsp").forward(req, resp);
+			req.getRequestDispatcher("board/boardList.tiles").forward(req, resp);
 		}
 	}
 

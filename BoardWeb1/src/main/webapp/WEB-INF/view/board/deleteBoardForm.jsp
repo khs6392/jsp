@@ -1,14 +1,9 @@
-<%@page import="co.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
-<jsp:include page="../public/header.jsp" />
 
 <h3>상세화면(deleteBoardForm.jsp)</h3>
-<%
- BoardVO board = (BoardVO) request.getAttribute("board");
-%>
 <form action="deleteBoard.do">
 <table class="table">
  <tr>
@@ -35,4 +30,3 @@
   </tr>
 </table>
 </form>
-<jsp:include page="../public/footer.jsp" />

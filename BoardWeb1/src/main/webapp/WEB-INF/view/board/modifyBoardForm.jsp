@@ -1,7 +1,6 @@
 <%@page import="co.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../public/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <h3>상세화면(board.jsp)</h3>
@@ -9,6 +8,9 @@
  BoardVO board = (BoardVO) request.getAttribute("board");
 %>
 <form action="modifyBoard.do">
+  <input type="hidden" value="${searchCondition }" name="searchCondition">
+  <input type="hidden" value="${keyword }" name="keyword">
+  <input type="hidden" value="${page }" name="page">
 <table class="table">
  <tr>
    <th>글번호</th><td><input type="text" value="<%=board.getBoardNo() %>" name="bno"></td>
@@ -37,4 +39,3 @@
 
 
 
-<%@include file="../public/footer.jsp" %>    

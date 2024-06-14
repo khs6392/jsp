@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="cust" %>
-<jsp:include page="../public/header.jsp"/>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <h3>로그인화면(loginForm.jsp)</h3>
 <cust:line/>
-
 
 <!-- JSP standard tag library : JSTL-->
 <form action="login.do">
@@ -27,4 +25,3 @@
 
 
 
-<jsp:include page="../public/footer.jsp"/> 

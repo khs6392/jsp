@@ -19,14 +19,18 @@ public class GetBoard implements Control {
 		// board.jsp 페이지에 출력.
 		String bno = req.getParameter("bno"); //bno 파라미터 정보 가져오기
 		String page = req.getParameter("page"); //bno 파라미터 정보 가져오기
+		String sc = req.getParameter("searchCondition");
+		String kw = req.getParameter("keyword");
 		
 		BoardService svc = new BoardServiceImpl(); // Impl 객체생성
 		BoardVO brd = svc.getBoard(Integer.parseInt(bno)); // 반환되는 정보찾아 반환값 잡아주기
 		
 		req.setAttribute("board", brd);
 		req.setAttribute("page", page);
+		req.setAttribute("searchCondition", sc);
+		req.setAttribute("keyword", kw);
 		
-		req.getRequestDispatcher("WEB-INF/view/board.jsp") //
+		req.getRequestDispatcher("board/board.tiles") //
 						.forward(req, resp); //board.jsp 로 출력
 		
 

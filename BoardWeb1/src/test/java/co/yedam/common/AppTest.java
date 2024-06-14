@@ -1,13 +1,25 @@
 package co.yedam.common;
 
-import co.yedam.service.BoardService;
-import co.yedam.service.BoardServiceImpl;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import co.yedam.mapper.BoardMapper;
 
 public class AppTest {
 	public static void main(String[] args) {
-		BoardService svc = new BoardServiceImpl();
+		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class); 
 		
-		System.out.println(svc.getBoard(100));
+		SearchVO search = new SearchVO(1, "T", "javascript");
+		
+		mapper.boardListpaging(search).forEach(bvo -> System.out.println(bvo));
+		
+		
+//		BoardService svc = new BoardServiceImpl();
+		
+//		System.out.println(svc.getBoard(100));
 		
 //		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
 //		SqlSession sqlSession = sqlSessionFactory.openSession();

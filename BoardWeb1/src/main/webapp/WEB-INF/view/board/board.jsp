@@ -1,27 +1,14 @@
-<%@page import="co.yedam.common.PageDTO"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="co.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<jsp:include page="../public/header.jsp" />
-<%
-  String paging = (String)request.getAttribute("page"); // Attribute 값 읽어오기
-  BoardVO board = (BoardVO) request.getAttribute("board");
-  SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 EEEE hh시 mm분 ss초");
-  String yyyymmdd = sdf.format(board.getCreationDate());
-  //로그인 아이디
-  String loginId = (String)session.getAttribute("logId");
-%>
+
 <p>------board.jsp-------</p>
-<c:set var="name" value="hong"></c:set>  <!--  변수값을 넣어주는 명령어 c:set -->
-<c:forEach var="i" begin="1" end="5" step="1">
-<p>${i}</p>
-</c:forEach>
-<p>${board}</p>
 <form name="myFrm" action="deleteForm.do">
+  <input type="hidden" value="${page}" name="page">
   <input type="hidden" value="${board.boardNo}" name="bno">
+  <input type="hidden" value="${searchCondition }" name="searchCondition">
+  <input type="hidden" value="${keyword }" name="keyword">
 <table class="table table-sm">
   <tr>
     <th style="width:100px">글번호</th>
@@ -35,7 +22,7 @@
     </tr>
     <tr>
     <th>내용</th>
-    <td colspan="4" ><textarea rows="10" cols="50"><c:out value="${board.content }"/></textarea></td>
+    <td colspan="4"  ><textarea rows="10" cols="50" readonly><c:out value="${board.content }"/></textarea></td>
     </tr>
     <tr>
     <th>작성자</th>
@@ -77,7 +64,6 @@ console.log(document.querySelector('#modBtn'))
 			});
 	
 </script>
-  <a href="boardList.do?page=${page }" type="button" class="btn btn-primary">목록으로 이동하기</a>
+  <a href="boardList.do?page=${page }&searchCondition=${searchCondition}&keyword=${keyword}" type="button" class="btn btn-primary">목록으로 이동하기</a>
   
 
-<jsp:include page="../public/footer.jsp" />
