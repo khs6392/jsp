@@ -21,7 +21,8 @@
 				</when>
 				<when test="searchCondition == 'TW'.toString()">
 					title like '%'||#{keyword}||'%'
-					or writer like '%'||#{keyword}||'%'
+					or writer like
+					'%'||#{keyword}||'%'
 				</when>
 				<otherwise>
 					1 = 1
@@ -48,7 +49,8 @@
 		where board_no = #{bNo}
 	</select>
 
-	<select id="getTotalCnt"  resultType="int" parameterType="co.yedam.common.SearchVO">
+	<select id="getTotalCnt" resultType="int"
+		parameterType="co.yedam.common.SearchVO">
 		select count(1)
 		from board_tbl
 		<where>
@@ -61,7 +63,8 @@
 				</when>
 				<when test="searchCondition == 'TW'.toString()">
 					title like '%'||#{keyword}||'%'
-					or writer like '%'||#{keyword}||'%'
+					or writer like
+					'%'||#{keyword}||'%'
 				</when>
 			</choose>
 		</where>
@@ -70,25 +73,30 @@
 	<select id="boardList" resultType="co.yedam.vo.BoardVO">
 		select *
 		from board_tbl
-		order by board_no
+		order by
+		board_no
 	</select>
 
 
 	<insert id="insertBoard" parameterType="co.yedam.vo.BoardVO">
-		insert into board_tbl(board_no, title, content, writer)
-		values(board_seq.nextval, #{title}, #{content}, #{writer})
+		insert into
+		board_tbl(board_no, title, content, writer)
+		values(board_seq.nextval,
+		#{title}, #{content}, #{writer})
 	</insert>
 
 	<update id="updateBoard" parameterType="co.yedam.vo.BoardVO">
 		update board_tbl
-		set title = #{title},
+		set title
+		= #{title},
 		content = #{content}
 		where board_no = #{boardNo}
 	</update>
 
 	<delete id="deleteBoard" parameterType="co.yedam.vo.BoardVO">
 		delete board_tbl
-		where board_no = #{boardNo}
+		where
+		board_no = #{boardNo}
 	</delete>
 
 	<select id="selectMember" resultType="co.yedam.vo.MemberVO">
@@ -97,4 +105,37 @@
 		where user_id = #{id}
 		and user_pw = #{pw}
 	</select>
+
+	<select id="memberList" resultType="co.yedam.vo.MemberVO">
+		select *
+		from member_tbl
+	</select>
+	<insert id="insertMemberAjax"
+		parameterType="co.yedam.vo.MemberVO">
+		insert into member_tbl(user_id, user_pw, user_name,
+		responsibility)
+		values(#{userId}, #{userPw}, #{userName},
+		#{responsibility})
+	</insert>
+
+	<select id="selectMemberAjax" parameterType="String">
+		select count(1)
+		from member_tbl
+		where user_id = #{id}
+	</select>
+	
+	<delete id="removeMemberAjax" parameterType="String">
+		delete member_tbl
+		where user_id = #{id}
+	</delete>
+	
+	<update id="modMemberAjax" parameterType="co.yedam.vo.BoardVO">
+		update member_tbl
+		set user_name
+		= #{userName},
+		user_pw = #{userPw}
+		where user_id = #{id}
+	</update>
+
+
 </mapper>
