@@ -1,20 +1,46 @@
 package co.yedam.common;
 
+import java.util.function.Consumer;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import co.yedam.mapper.BoardMapper;
+import co.yedam.mapper.ReplyMapper;
+import co.yedam.vo.ReplyVO;
 
 public class AppTest {
 	public static void main(String[] args) {
 		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
-		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class); 
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class); 
+		// interface에 구현해 메소드가 하나만 있는 인터페이스 : 함수형 인터페이스.
+		mapper.selectListPaging(62, 2)//
+		.forEach(reply -> System.out.println(reply));
 		
-		SearchVO search = new SearchVO(1, "T", "javascript");
 		
-		mapper.boardListpaging(search).forEach(bvo -> System.out.println(bvo));
+		
+		
+		
+//		ReplyVO rvo = mapper.selectReply(24);
+		
+//		System.out.println(rvo);
+//		ReplyVO rvo = new ReplyVO();
+//		rvo.setReply("댓글작성테스트");
+//		rvo.setReplyer("admin");
+//		rvo.setBoardNo(202);
+//		
+//		try {
+//		if(mapper.insertReply(rvo) == 1) {
+//			System.out.println("입력성공.");
+//		}
+//		} catch(Exception e) {
+//			System.out.println("예외발생.");
+//		}
+//		mapper.selectList(201).forEach(reply -> System.out.println(reply));
+//		
+//		
+		
 		
 		
 //		BoardService svc = new BoardServiceImpl();
